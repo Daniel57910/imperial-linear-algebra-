@@ -1,0 +1,5 @@
+setup.py
+Imperial_Math_ML_Solutoin.egg-info/PKG-INFO
+Imperial_Math_ML_Solutoin.egg-info/SOURCES.txt
+Imperial_Math_ML_Solutoin.egg-info/dependency_links.txt
+Imperial_Math_ML_Solutoin.egg-info/top_level.txt
