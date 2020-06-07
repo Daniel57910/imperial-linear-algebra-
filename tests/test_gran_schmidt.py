@@ -17,3 +17,10 @@ class TestEchelonCalc(unittest.TestCase):
     test_row = V[0]
     test_row = gran_schmidt_process.convert_row_to_length_1(test_row)
     self.assertEqual(np.sum(la.norm(test_row)), 1)
+
+  
+  def test_gran_schmidt_on_length_2_vector(self):
+    rows = V[0: 2]
+    test = gran_schmidt_process.gsBasis4(rows)
+    self.assertEqual(np.sum(la.norm(test[0])), 1)
+    self.assertEqual(np.sum(la.norm(test[1])), 1)
