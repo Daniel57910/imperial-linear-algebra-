@@ -22,5 +22,7 @@ class TestEchelonCalc(unittest.TestCase):
   def test_gran_schmidt_on_length_2_vector(self):
     rows = V[0: 2]
     test = gran_schmidt_process.gsBasis4(rows)
-    self.assertEqual(np.sum(la.norm(test[0])), 1)
-    self.assertEqual(np.sum(la.norm(test[1])), 1)
+    row_1, row_2 = test[0], test[1]
+    self.assertEqual(np.sum(la.norm(row_1)), 1)
+    self.assertEqual(np.sum(la.norm(row_2)), 1)
+    self.assertEqual(row_1 @ row_2, 0)
