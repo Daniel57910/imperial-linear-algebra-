@@ -6,8 +6,10 @@ verySmallNumber = 1e-14  # That's 1×10⁻¹⁴ = 0.00000000000001
 
 def gsBasis4(A):    
     B = np.array(A, dtype=np.float_)
-    B[0] = B[0] / la.norm(B[0])
-    return B
+    B[0] = convert_row_to_length_1(B[0])
+    for i in range(1, 4):
+      for j in range(0, i):
+        print(f'Vector {B[i]} -> {B[j]}')
 
 def gsBasis(A):
     return B
@@ -26,4 +28,4 @@ V = np.array([[1, 0, 2, 6],
               [1, -6, 2, 3]], dtype=np.float_)
 
 
-
+gsBasis4(V)
