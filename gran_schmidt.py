@@ -33,4 +33,5 @@ def convert_row_to_length_1(row: np.array) -> np.array:
 def get_orthonormal_compliment(current: np.array, normalized_vector: np.array) -> np.array:
   return (current @ normalized_vector) * normalized_vector
 
-
+def dimensions(A) :
+    return np.sum(la.norm(gsBasis(A), axis=0))

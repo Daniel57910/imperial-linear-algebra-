@@ -1,5 +1,6 @@
 import unittest
-import gran_schmidt_process
+import gran_schmidt
+
 import copy
 import numpy as np
 import numpy.linalg as la
@@ -13,18 +14,21 @@ V = np.array([[1, 0, 2, 6],
 class TestEchelonCalc(unittest.TestCase):
 
   def test_convert_row_to_basis_set(self):
-
     test_row = V[0]
-    test_row = gran_schmidt_process.convert_row_to_length_1(test_row)
+    test_row = gran_schmidt.convert_row_to_length_1(test_row)
     self.assertEqual(np.sum(la.norm(test_row)), 1)
 
   
-  def test_gran_schmidt_on_length_2_vector(self):
-    test = gran_schmidt_process.gsBasis4(V)
-
+  def test_gran_schmidt_on_length_4_hardcoded(self):
+    test = gran_schmidt.gsBasis4(V)
     for row in test:
       self.assertAlmostEqual(np.sum(la.norm(row)), 1)
-
     dot_product = reduce(np.dot, test)
-
     self.assertAlmostEqual(dot_product, 0)
+
+
+  def test_gran_schmidt_on_length_n(self):
+    test = gran_schmidt.gsBasis(V)
+    for row in test:
+      self.assertAlmostEqual(np.sum(la.norm(row)), 1)
+    dot_product = reduce(np.dot, test)
