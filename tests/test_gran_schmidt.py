@@ -3,7 +3,7 @@ import gran_schmidt_process
 import copy
 import numpy as np
 import numpy.linalg as la
-
+from functools import reduce
 V = np.array([[1, 0, 2, 6],
               [0, 1, 8, 2],
               [2, 8, 3, 1],
@@ -20,9 +20,11 @@ class TestEchelonCalc(unittest.TestCase):
 
   
   def test_gran_schmidt_on_length_2_vector(self):
-    rows = V[0: 2]
-    test = gran_schmidt_process.gsBasis4(rows)
-    row_1, row_2 = test[0], test[1]
-    self.assertEqual(np.sum(la.norm(row_1)), 1)
-    self.assertEqual(np.sum(la.norm(row_2)), 1)
-    self.assertEqual(row_1 @ row_2, 0)
+    test = gran_schmidt_process.gsBasis4(V)
+
+    for row in test:
+      self.assertAlmostEqual(np.sum(la.norm(row)), 1)
+
+    dot_product = reduce(np.dot, test)
+
+    self.assertAlmostEqual(dot_product, 0)
