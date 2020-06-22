@@ -10,6 +10,12 @@ V = np.array([[1, 0, 2, 6],
               [2, 8, 3, 1],
               [1, -6, 2, 3]], dtype=np.float_)
 
+larger_vector_space = np.array([
+    [1, 1, 2, 0, 1, 1],
+    [0, 0, 0, 1, 2, 1],
+    [1, 2, 3, 1, 3, 2],
+    [1, 0, 1, 0, 1, 1]
+], dtype=float)
 
 class TestEchelonCalc(unittest.TestCase):
 
@@ -32,3 +38,12 @@ class TestEchelonCalc(unittest.TestCase):
     for row in test:
       self.assertAlmostEqual(np.sum(la.norm(row)), 1)
     dot_product = reduce(np.dot, test)
+    self.assertAlmostEqual(dot_product, 0)
+
+
+  def test_on_larger_space(self):
+    vector = gran_schmidt.gsBasis(larger_vector_space)
+    for row in vector:
+      self.assertAlmostEqual(np.sum(la.norm(row)), 1)
+    dot_product = reduce(np.dot, vector)
+    self.assertAlmostEqual(dot_product, 0)
