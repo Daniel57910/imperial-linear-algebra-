@@ -14,7 +14,12 @@ class TestPageRank(unittest.TestCase):
         self.assertLessEqual(la.norm(site_probability_vector - previous_site_vector), 0.01)
     
     def test_eigenvector_decomposition(self):
-        power_1_prob_matrix = calculate_page_rank_eigen_decomposition(
+        # proof M**N*V = IE**N*I^-1V
+        eigen_probability_vector = calculate_page_rank_eigen_decomposition(
             np.array(SITE_PROBABILITY_MATRIX)
         )
-        self.assertAlmostEqual(la.norm(power_1_prob_matrix), la.norm(SITE_PROBABILITY_MATRIX))
+        site_probability_vector, previous_site_vector = calculate_page_rank_brute_force(
+            np.array(SITE_PROBABILITY_MATRIX)
+        )
+
+        self.assertAlmostEqual(la.norm(eigen_probability_vector), la.norm(site_probability_vector))
